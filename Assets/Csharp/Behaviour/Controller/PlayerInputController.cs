@@ -15,8 +15,6 @@ public class PlayerInputController : MonoBehaviour
     }
 
     public void AdvanceText() {
-        Debug.Log("OK");
-
         if(playerInputDelay) {
             return;
         }

@@ -6,6 +6,8 @@ using TMPro;
 
 public class StoryTextDialogueController : MonoBehaviour
 {    
+    private readonly List<char> PhraseEnds = new List<char>(){'.', '!', '?'};  
+
     public string CurrentDialogueTextShow { get; private set; }
 
     public TMP_Text dialogueText;
@@ -16,8 +18,6 @@ public class StoryTextDialogueController : MonoBehaviour
 
     private string currentDialogueText;
 
-    private bool stopReading;
-
     public StoryTextDialogueController() {
         service = StoryDialogueService.GetInstance();
     }
@@ -27,7 +27,8 @@ public class StoryTextDialogueController : MonoBehaviour
     }
 
     public void FinishReading() {
-        stopReading = true;
+        StopAllCoroutines();
+        ShowFullText(); 
     } 
 
     private void OnTextSet() {
@@ -44,10 +45,6 @@ public class StoryTextDialogueController : MonoBehaviour
         dialogueText.ForceMeshUpdate();
 
         for(var i = 0; i < currentDialogueText.Length; i++) {
-            if(stopReading) {
-                break;
-            }
-
             if(IsHtmlStartingTag(currentDialogueText[i])) {
                 if(addClosingTag) {
                     i += tagValue.Length + 2;
@@ -68,7 +65,11 @@ public class StoryTextDialogueController : MonoBehaviour
 
             dialogueText.text = CurrentDialogueTextShow;
 
-            yield return new WaitForSeconds(.02f);
+            if(i > 0 && IsLastCharacterAPhraseEnd(currentDialogueText[i-1]) && IsCurrentCharacterANewPhrase(i)) {
+                yield return new WaitForSeconds(.5f);
+            } else {
+                yield return new WaitForSeconds(.02f);
+            }
         }
         ShowFullText();      
     }
@@ -76,7 +77,6 @@ public class StoryTextDialogueController : MonoBehaviour
         CurrentDialogueTextShow = currentDialogueText;
         dialogueText.text = CurrentDialogueTextShow;
         IsReading = false; 
-        stopReading = false;
     }
 
     private bool IsHtmlStartingTag(char text) {
@@ -94,5 +94,13 @@ public class StoryTextDialogueController : MonoBehaviour
 
     private string GetHtmlClosingTag(string tagValue) {
         return "<\\" + tagValue + ">"; 
+    }
+
+    private bool IsLastCharacterAPhraseEnd(char text) {
+        return PhraseEnds.Contains(text); 
+    }
+
+    private bool IsCurrentCharacterANewPhrase(int currentTextIndex) {
+        return currentDialogueText[currentTextIndex].Equals(' ');
     }
 }

@@ -1,0 +1,7 @@
+{
+    "type" : "Dialogue",
+    "stateName" : "case_1_dialog_1",
+    "nextStateFile" : null,
+    "dialogueFile" : "Dialog_1.json"
+}
+

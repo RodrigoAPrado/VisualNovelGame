@@ -25,7 +25,6 @@ Isso é roubo! Coloca de volta na mochila dele!
 #Speaker:???-1
 E você vai fazer o que se eu não devolver?
 
-#Speaker:(empty)
 #Action:opening-transit-1
 ((empty))
 

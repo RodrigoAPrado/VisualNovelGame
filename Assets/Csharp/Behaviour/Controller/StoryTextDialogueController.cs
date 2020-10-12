@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Csharp.Service;
 using TMPro;
+using System;
 
 public class StoryTextDialogueController : MonoBehaviour
-{    
+{   
+    private const int TagEscape = 2; 
+
     private readonly List<char> PhraseEnds = new List<char>(){'.', '!', '?'};  
 
     public string CurrentDialogueTextShow { get; private set; }
 
+    public bool IsReading { get; private set; }
+
     public TMP_Text dialogueText;
 
-    public bool IsReading { get; private set; }
+    public event Action OnFinishReading;
+
+    public event Action OnStartReading;
 
     private StoryDialogueService service;
 
     private string currentDialogueText;
+
+    private float phraseEndCharacterDelay = .5f;
+
+    private float defaultCharacterDelay = .05f;
 
     public StoryTextDialogueController() {
         service = StoryDialogueService.GetInstance();
@@ -36,6 +47,7 @@ public class StoryTextDialogueController : MonoBehaviour
         currentDialogueText = service.CurrentText;
         CurrentDialogueTextShow = "";
         IsReading = true;
+        OnStartReading?.Invoke();
         StartCoroutine(ReadTextRoutine());
     }
 
@@ -44,39 +56,42 @@ public class StoryTextDialogueController : MonoBehaviour
         var tagValue = "";
         dialogueText.ForceMeshUpdate();
 
-        for(var i = 0; i < currentDialogueText.Length; i++) {
-            if(IsHtmlStartingTag(currentDialogueText[i])) {
+        for(var currentDialogueTextIndex = 0; currentDialogueTextIndex < currentDialogueText.Length; currentDialogueTextIndex++) {
+            if(IsHtmlStartingTag(currentDialogueText[currentDialogueTextIndex])) {
                 if(addClosingTag) {
-                    i += tagValue.Length + 2;
+                    currentDialogueTextIndex += GetTagLengh(tagValue);
                     addClosingTag = false;
                     continue;     
                 } else {
-                    var evalResult = ReadTextHtmlTag(currentDialogueText[i+1]); 
-                    i = evalResult.Item1;
+                    var evalResult = ReadTextHtmlTag(currentDialogueText[currentDialogueTextIndex+1]); 
+                    currentDialogueTextIndex = evalResult.Item1;
                     tagValue = evalResult.Item2;
                     addClosingTag = true;
                     continue;
                 }
             }
-            CurrentDialogueTextShow = currentDialogueText.Remove(i);
+
+            CurrentDialogueTextShow = currentDialogueText.Remove(currentDialogueTextIndex);
             if(addClosingTag) {
                 CurrentDialogueTextShow += GetHtmlClosingTag(tagValue); 
             }
 
             dialogueText.text = CurrentDialogueTextShow;
 
-            if(i > 0 && IsLastCharacterAPhraseEnd(currentDialogueText[i-1]) && IsCurrentCharacterANewPhrase(i)) {
-                yield return new WaitForSeconds(.5f);
+            if(currentDialogueTextIndex > 0 && IsLastCharacterAPhraseEnd(currentDialogueText[currentDialogueTextIndex-1]) && IsCurrentCharacterANewPhrase(currentDialogueTextIndex)) {
+                yield return new WaitForSeconds(phraseEndCharacterDelay);
             } else {
-                yield return new WaitForSeconds(.02f);
+                yield return new WaitForSeconds(defaultCharacterDelay);
             }
         }
         ShowFullText();      
     }
+
     private void ShowFullText() {
         CurrentDialogueTextShow = currentDialogueText;
         dialogueText.text = CurrentDialogueTextShow;
         IsReading = false; 
+        OnFinishReading?.Invoke();
     }
 
     private bool IsHtmlStartingTag(char text) {
@@ -102,5 +117,9 @@ public class StoryTextDialogueController : MonoBehaviour
 
     private bool IsCurrentCharacterANewPhrase(int currentTextIndex) {
         return currentDialogueText[currentTextIndex].Equals(' ');
+    }
+
+    private int GetTagLengh(string tagValue) {
+        return tagValue.Length + TagEscape;
     }
 }

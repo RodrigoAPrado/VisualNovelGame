@@ -14,10 +14,10 @@ public class DialogueFinishController : MonoBehaviour
     }
 
     private void HideFinishSprite() {
-        dialogueFinishAnimator.SetTrigger("Hide");
+        dialogueFinishAnimator.SetBool("Play", false);
     }
 
     private void PlayFinishSprite() {
-        dialogueFinishAnimator.SetTrigger("Play");
+        dialogueFinishAnimator.SetBool("Play", true);
     }
 }

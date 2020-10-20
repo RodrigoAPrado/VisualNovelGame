@@ -47,11 +47,11 @@ public class StoryTextDialogueController : MonoBehaviour
         currentDialogueText = service.CurrentText;
         CurrentDialogueTextShow = "";
         IsReading = true;
-        OnStartReading?.Invoke();
         StartCoroutine(ReadTextRoutine());
     }
 
     private IEnumerator ReadTextRoutine() {
+        OnStartReading?.Invoke();
         var addClosingTag = false;
         var tagValue = "";
         dialogueText.ForceMeshUpdate();
@@ -88,10 +88,10 @@ public class StoryTextDialogueController : MonoBehaviour
     }
 
     private void ShowFullText() {
+        OnFinishReading?.Invoke();
         CurrentDialogueTextShow = currentDialogueText;
         dialogueText.text = CurrentDialogueTextShow;
         IsReading = false; 
-        OnFinishReading?.Invoke();
     }
 
     private bool IsHtmlStartingTag(char text) {

@@ -28,7 +28,7 @@ namespace Csharp.Service
 
         public void Setup(string storyText) {
             storyService.SetStory(storyText);
-            storyService.AddStoryContinueListener(OnStoryRead);
+            storyService.OnStoryRead += OnStoryRead;
         }
 
         public void BeginReadingStory() {
@@ -43,14 +43,15 @@ namespace Csharp.Service
         private void OnStoryRead() {
             var storyTags = storyService.StoryCurrentTags;
             var storyAction = GetTagData(storyTags, ActionTag);
-            if(storyAction != null) {
+            if(storyAction.Length > 0) {
                 // Do something
+                return;
             }
 
             var storyText = storyService.StoryCurrentText;
             var storySpeaker = GetTagData(storyTags, SpeakerTag);
             var storyColor = GetTagData(storyTags, ColorTag);
-            
+
             storyDialogueService.SetDialogueData(storyText, storySpeaker, storyColor);
         }
 

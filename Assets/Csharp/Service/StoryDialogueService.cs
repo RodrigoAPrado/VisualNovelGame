@@ -15,9 +15,9 @@ namespace Csharp.Service
         private static StoryDialogueService instance;        
 
         private readonly Dictionary<String, Color> availableColors = new Dictionary<string, Color>{
-            {"Blue" , new Color(0, 0.1f, 0.6f)},
+            {"Blue" , new Color(0.51f, 0.38f, 0.81f)},
             {"Green", new Color(0, 0.6f, 0.1f)},
-            {"Default", new Color(0.25f, 0.25f, 0.25f)}
+            {"Default", new Color(1, 1, 1)}
         };
 
         private StoryDialogueService() {}

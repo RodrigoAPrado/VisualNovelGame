@@ -1,3 +1,4 @@
+using System.Data;
 using System;
 using System.Collections.Generic;
 using Ink.Runtime;
@@ -14,8 +15,12 @@ namespace Csharp.Service
 
         public bool CanStoryContinue => story.canContinue;
 
+        public bool AwaitPlayerChoice => story.currentChoices?.Count > 0;
+
         private Story story;
         private static StoryService instance;
+
+        public event Action OnStoryRead;
 
         private StoryService() {}
 
@@ -40,6 +45,7 @@ namespace Csharp.Service
             if(story != null) {
                 if(story.canContinue){
                     story.Continue();
+                    OnStoryRead?.Invoke();
                     return;
                 }
                 throw new InvalidOperationException("Cannot continue story!");

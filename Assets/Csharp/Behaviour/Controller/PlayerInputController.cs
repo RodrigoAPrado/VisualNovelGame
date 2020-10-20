@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Csharp.Service;
 
 public class PlayerInputController : MonoBehaviour
 {
@@ -8,6 +9,18 @@ public class PlayerInputController : MonoBehaviour
     private SceneController sceneController;
 
     private bool playerInputDelay;
+
+    private bool isAwatingPlayerChoice;
+
+    private StoryDialogueService storyDialogueService;
+
+    PlayerInputController() {
+        storyDialogueService = StoryDialogueService.GetInstance();
+    }
+
+    void Awake() {
+        storyDialogueService.AwaitPlayerChoice += AwaitPlayerchoice;
+    }
 
     void Start() {
         dialogueController = GameObject.FindGameObjectWithTag("StoryTextDialogueController").GetComponent<StoryTextDialogueController>();
@@ -25,11 +38,20 @@ public class PlayerInputController : MonoBehaviour
             StartCoroutine(ReducePlayerInputDelay());
             return;
         } 
+
+        if(isAwatingPlayerChoice) {
+            return;
+        }
+        
         sceneController.NextDialogue();
     }
 
     private IEnumerator ReducePlayerInputDelay() {
         yield return new WaitForSeconds(.2f);
         playerInputDelay = false;
+    }
+
+    private void AwaitPlayerchoice() {
+        isAwatingPlayerChoice = true;
     }
 }

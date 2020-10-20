@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Csharp.Model.Dialogue;
 
 namespace Csharp.Service
 {
@@ -12,6 +13,7 @@ namespace Csharp.Service
         public Color CurrentColor { get; private set;}
 
         public event Action DialogueSet;
+        public event Action AwaitPlayerChoice;
 
         private static StoryDialogueService instance;        
 
@@ -27,11 +29,15 @@ namespace Csharp.Service
             return instance ?? (instance = new StoryDialogueService());
         }
 
-        public void SetDialogueData(string text, string speaker, string speakerTitle, string color) {
-            CurrentText = text;
-            CurrentSpeaker = speaker;
-            CurrentSpeakerTitle = speakerTitle;
-            CurrentColor = GetColor(color);
+        public void SetDialogueData(DialogueLineModel dialogueData) {
+            if(dialogueData.IsOptionsNext) {
+                AwaitPlayerChoice?.Invoke();
+            }
+
+            CurrentText = dialogueData.Text;
+            CurrentSpeaker = dialogueData.Speaker;
+            CurrentSpeakerTitle = dialogueData.SpeakerTitle;
+            CurrentColor = GetColor(dialogueData.TextColor);
 
             DialogueSet?.Invoke();
         }

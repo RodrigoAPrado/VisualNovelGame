@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using Csharp.Model.Dialogue;
 
 namespace Csharp.Service
 {
@@ -49,12 +50,15 @@ namespace Csharp.Service
                 return;
             }
 
-            var storyText = storyService.StoryCurrentText;
-            var storySpeaker = GetTagData(storyTags, SpeakerTag);
-            var storySpeakerTitle = GetTagData(storyTags, SpeakerTitleTag);
-            var storyColor = GetTagData(storyTags, ColorTag);
+            var dialogueData = new DialogueLineModel();
 
-            storyDialogueService.SetDialogueData(storyText, storySpeaker, storySpeakerTitle, storyColor);
+            dialogueData.Text = storyService.StoryCurrentText;
+            dialogueData.Speaker = GetTagData(storyTags, SpeakerTag);
+            dialogueData.SpeakerTitle = GetTagData(storyTags, SpeakerTitleTag);
+            dialogueData.TextColor = GetTagData(storyTags, ColorTag);
+            dialogueData.IsOptionsNext = storyService.AwaitPlayerChoice;
+
+            storyDialogueService.SetDialogueData(dialogueData);
         }
 
         private string GetTagData(List<string> storyTags, string dataParam) {

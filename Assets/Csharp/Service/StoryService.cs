@@ -52,5 +52,9 @@ namespace Csharp.Service
             }
             throw new InvalidOperationException("Story has not been set!");
         }
+
+        public void SelectOption(int choiceIndex) {
+            story.ChooseChoiceIndex(choiceIndex);
+        }
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - StoryTextDialogueController
   - SceneController
   - SpeakerTitle Text
+  - Canvas
   layers:
   - Default
   - TransparentFX

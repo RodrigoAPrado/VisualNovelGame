@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using System.Data;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Ink.Runtime;
 
 namespace Csharp.Service
@@ -21,6 +23,8 @@ namespace Csharp.Service
         private static StoryService instance;
 
         public event Action OnStoryRead;
+
+        public event Action OnPlayerChoice;
 
         private StoryService() {}
 
@@ -45,6 +49,11 @@ namespace Csharp.Service
             if(story != null) {
                 if(story.canContinue){
                     story.Continue();
+                    UnityEngine.Debug.Log(story.currentText);
+                    if(story.currentText == null || story.currentText.Length <= 0) {
+                        ContinueStory();
+                        return; 
+                    }
                     OnStoryRead?.Invoke();
                     return;
                 }
@@ -55,6 +64,7 @@ namespace Csharp.Service
 
         public void SelectOption(int choiceIndex) {
             story.ChooseChoiceIndex(choiceIndex);
+            OnPlayerChoice?.Invoke();
         }
     }
 }

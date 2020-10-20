@@ -15,6 +15,8 @@ namespace Csharp.Service
 
         public event Action SetupPlayerChoice;
 
+        public event Action ClearPlayerChoice;
+
         private OptionSelectService() {
             storyService = StoryService.GetInstance();
             storyDialogueService = StoryDialogueService.GetInstance();
@@ -26,6 +28,7 @@ namespace Csharp.Service
 
         public void Setup() {
             storyDialogueService.AwaitPlayerChoice += AwaitPlayerChoice;
+            storyDialogueService.FinishPlayerChoice += FinishPlayerChoice;
         }
 
         public List<string> GetChoices() {
@@ -44,6 +47,10 @@ namespace Csharp.Service
 
         private void AwaitPlayerChoice() {
             SetupPlayerChoice?.Invoke();
+        }
+
+        private void FinishPlayerChoice() {
+            ClearPlayerChoice?.Invoke();
         }
     }
 }

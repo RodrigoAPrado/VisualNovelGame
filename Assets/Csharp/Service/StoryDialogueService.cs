@@ -14,6 +14,7 @@ namespace Csharp.Service
 
         public event Action DialogueSet;
         public event Action AwaitPlayerChoice;
+        public event Action FinishPlayerChoice;
 
         private static StoryDialogueService instance;        
 
@@ -40,6 +41,10 @@ namespace Csharp.Service
             CurrentColor = GetColor(dialogueData.TextColor);
 
             DialogueSet?.Invoke();
+        }
+
+        public void OnPlayerChoice() {
+            FinishPlayerChoice?.Invoke();
         }
 
         private Color GetColor(string color) {

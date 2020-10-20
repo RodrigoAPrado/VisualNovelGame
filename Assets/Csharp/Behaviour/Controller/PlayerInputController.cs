@@ -20,6 +20,7 @@ public class PlayerInputController : MonoBehaviour
 
     void Awake() {
         storyDialogueService.AwaitPlayerChoice += AwaitPlayerchoice;
+        storyDialogueService.FinishPlayerChoice += FinishPlayerChoice;
     }
 
     void Start() {
@@ -53,5 +54,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void AwaitPlayerchoice() {
         isAwatingPlayerChoice = true;
+    }
+
+    private void FinishPlayerChoice() {
+        isAwatingPlayerChoice = false;
     }
 }

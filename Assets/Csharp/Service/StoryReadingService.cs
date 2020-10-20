@@ -31,6 +31,7 @@ namespace Csharp.Service
         public void Setup(string storyText) {
             storyService.SetStory(storyText);
             storyService.OnStoryRead += OnStoryRead;
+            storyService.OnPlayerChoice += OnPlayerChoice;
         }
 
         public void BeginReadingStory() {
@@ -59,6 +60,11 @@ namespace Csharp.Service
             dialogueData.IsOptionsNext = storyService.AwaitPlayerChoice;
 
             storyDialogueService.SetDialogueData(dialogueData);
+        }
+
+        private void OnPlayerChoice() {
+            storyDialogueService.OnPlayerChoice();
+            storyService.ContinueStory();
         }
 
         private string GetTagData(List<string> storyTags, string dataParam) {

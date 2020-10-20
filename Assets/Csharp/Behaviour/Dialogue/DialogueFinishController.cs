@@ -21,6 +21,7 @@ public class DialogueFinishController : MonoBehaviour
         storyTextDialogueController.OnFinishReading += PlayFinishSprite;
         storyTextDialogueController.OnStartReading += HideFinishSprite;
         storyDialogueService.AwaitPlayerChoice += AwaitPlayerChoice;
+        storyDialogueService.FinishPlayerChoice += FinishPlayerChoice;
     }
 
     private void HideFinishSprite() {
@@ -36,5 +37,9 @@ public class DialogueFinishController : MonoBehaviour
 
     private void AwaitPlayerChoice() {
         isAwatingPlayerChoice = true;
+    }
+
+    private void FinishPlayerChoice() {
+        isAwatingPlayerChoice = false;
     }
 }

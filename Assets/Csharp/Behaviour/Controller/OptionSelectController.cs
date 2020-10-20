@@ -37,6 +37,7 @@ public class OptionSelectController : MonoBehaviour
         optionSelectService.Setup();
         optionSelectService.SetupPlayerChoice += SetupOptions;
         storyTextDialogueController.OnFinishReading += BeginShowOptions;
+        optionSelectService.ClearPlayerChoice += ClearPlayerchoice;
 
     }
 
@@ -90,5 +91,9 @@ public class OptionSelectController : MonoBehaviour
             choiceButton.SetActive(true);
             yield return new WaitForSeconds(buttonShowDelay);
         }
+    }
+
+    private void ClearPlayerchoice() {
+        optionSelected = false;
     }
 }

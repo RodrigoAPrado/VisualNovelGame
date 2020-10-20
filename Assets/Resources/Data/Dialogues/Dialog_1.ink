@@ -1,8 +1,4 @@
 INCLUDE CrossExamError.ink
-VAR wrongName = ""
-VAR wrongNameWork = ""
-VAR wrongNamePlace = ""
-
 
 #Speaker:???-1
 Isso é injusto. Eu sou melhor que os outros. Eu! É óbvio!
@@ -141,37 +137,44 @@ Você que havia se levantado. Qual o seu nome?
 ->whatIsYourName
 == whatIsYourName ==
 * [Elise Watson] -> myNameIsRight 
-* [Taylor Swift]  -> myNameIsWrongTaylor
-* [Scarlett Johansson] -> myNameIsWrongScarlett
+* [Taylor Swift] -> myNameIsWrongTaylor 
+* [Scarlett Johansson] -> mynameIsWrongScarlet
 
-== myNameIsWrongTaylor ==
-~ setWrongName("Taylor Swift", "cantora", "Spotify")
--> myNameIsWrongDialogue
-
-== myNameIsWrongScarlett ==
-~ setWrongName("Scarlett Johansson", "atriz", "cinema")
--> myNameIsWrongDialogue
-
-=== function setWrongName(name, work, place) ===
-~ wrongName = name
-~ wrongNameWork = work
-~ wrongNamePlace = place
-
-== myNameIsWrongDialogue ==
+== mynameIsWrongScarlet ==
 #Speaker:Elise
-Meu nome é {wrongName}
+Meu nome é Scarlett Johansson
 
 #Speaker:Professora
-{wrongName}... Sei, esse é seu nome né?
+Scarlett Johansson... Sei, esse é seu nome né?
 
 #Speaker:Elise
 Precisamente, professora!
 
 #Speaker:Professora
-Você é uma {wrongNameWork} então?
+Você é uma atriz então?
 
 #Speaker:Elise
-Com certeza! Eu faço cesta no {wrongNamePlace}!
+Com certeza! Eu faço cesta no cinema!
+-> myNameIsWrongDialogue
+
+== myNameIsWrongTaylor ==
+#Speaker:Elise
+Meu nome é Taylor Swift
+
+#Speaker:Professora
+Taylor Swift... Sei, esse é seu nome né?
+
+#Speaker:Elise
+Precisamente, professora!
+
+#Speaker:Professora
+Você é uma cantora então?
+
+#Speaker:Elise
+Com certeza! Eu faço cesta no Spotify!
+-> myNameIsWrongDialogue
+
+== myNameIsWrongDialogue ==
 
 #Speaker:Professora
 Isso é alguma piada? Saiba que não tem graça, mocinha.

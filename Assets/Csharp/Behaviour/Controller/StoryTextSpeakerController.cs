@@ -10,6 +10,8 @@ public class StoryTextSpeakerController : MonoBehaviour
 
     public TMP_Text speakerText;
 
+    public TMP_Text speakerTitleText;
+
     public StoryTextSpeakerController(){
         service = StoryDialogueService.GetInstance();
     }
@@ -20,5 +22,6 @@ public class StoryTextSpeakerController : MonoBehaviour
 
     private void OnSpeakerSet() {
         speakerText.text = service.CurrentSpeaker;
+        speakerTitleText.text = service.CurrentSpeakerTitle;
     }
 }

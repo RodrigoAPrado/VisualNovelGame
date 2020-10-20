@@ -8,15 +8,16 @@ namespace Csharp.Service
     {
         public string CurrentText { get; private set; }
         public string CurrentSpeaker { get; private set; }
+        public string CurrentSpeakerTitle { get; private set; }
         public Color CurrentColor { get; private set;}
 
         public event Action DialogueSet;
 
         private static StoryDialogueService instance;        
 
-        private readonly Dictionary<String, Color> availableColors = new Dictionary<string, Color>{
+        private readonly Dictionary<string, Color> availableColors = new Dictionary<string, Color>{
             {"Blue" , new Color(0.51f, 0.38f, 0.81f)},
-            {"Green", new Color(0, 0.6f, 0.1f)},
+            {"Green", new Color(0.52f, 0.72f, 0.21f)},
             {"Default", new Color(1, 1, 1)}
         };
 
@@ -26,9 +27,10 @@ namespace Csharp.Service
             return instance ?? (instance = new StoryDialogueService());
         }
 
-        public void SetDialogueData(string text, string speaker, string color) {
+        public void SetDialogueData(string text, string speaker, string speakerTitle, string color) {
             CurrentText = text;
             CurrentSpeaker = speaker;
+            CurrentSpeakerTitle = speakerTitle;
             CurrentColor = GetColor(color);
 
             DialogueSet?.Invoke();

@@ -8,6 +8,7 @@ namespace Csharp.Service
     public class StoryReadingService
     {
         private const string SpeakerTag = "Speaker:";
+        private const string SpeakerTitleTag = "SpeakerTitle:";
         private const string ActionTag = "Action:";
         private const string ColorTag = "Color:";
 
@@ -50,9 +51,10 @@ namespace Csharp.Service
 
             var storyText = storyService.StoryCurrentText;
             var storySpeaker = GetTagData(storyTags, SpeakerTag);
+            var storySpeakerTitle = GetTagData(storyTags, SpeakerTitleTag);
             var storyColor = GetTagData(storyTags, ColorTag);
 
-            storyDialogueService.SetDialogueData(storyText, storySpeaker, storyColor);
+            storyDialogueService.SetDialogueData(storyText, storySpeaker, storySpeakerTitle, storyColor);
         }
 
         private string GetTagData(List<string> storyTags, string dataParam) {

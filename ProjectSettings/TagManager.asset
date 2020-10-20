@@ -11,6 +11,7 @@ TagManager:
   - Speaker Box
   - StoryTextDialogueController
   - SceneController
+  - SpeakerTitle Text
   layers:
   - Default
   - TransparentFX

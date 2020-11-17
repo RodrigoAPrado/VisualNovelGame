@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
+using Csharp.Service.Super;
 
 namespace Csharp.Service
 {
-    public class StoryService
+    public class StoryService : SingletonService<StoryService> 
     {
         public List<Choice> StoryCurrentChoices => story.currentChoices; 
 
@@ -20,17 +21,13 @@ namespace Csharp.Service
         public bool AwaitPlayerChoice => story.currentChoices?.Count > 0;
 
         private Story story;
-        private static StoryService instance;
 
         public event Action OnStoryRead;
 
         public event Action OnPlayerChoice;
 
-        private StoryService() {}
-
-        public static StoryService GetInstance() 
-        {
-            return instance ?? (instance = new StoryService());
+        public StoryService() {
+            ValidateSingleton();
         }
 
         public void SetStory(string storyText) {
@@ -49,11 +46,6 @@ namespace Csharp.Service
             if(story != null) {
                 if(story.canContinue){
                     story.Continue();
-                    UnityEngine.Debug.Log(story.currentText);
-                    if(story.currentText == null || story.currentText.Length <= 0) {
-                        ContinueStory();
-                        return; 
-                    }
                     OnStoryRead?.Invoke();
                     return;
                 }

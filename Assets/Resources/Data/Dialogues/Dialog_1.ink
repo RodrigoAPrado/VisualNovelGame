@@ -21,7 +21,8 @@ Isso é roubo! Coloca de volta na mochila dele!
 #Speaker:???-1
 E você vai fazer o que se eu não devolver?
 
-#Action:opening-transit-1
+#Action:opening-transit
+#Opening:case-1
 ((empty))
 
 #Speaker:Elise
@@ -74,7 +75,8 @@ Se o que diz é verdade, mostre-nos o que você tem na mochila!
 #Speaker:Jack
 Mas eu também não tenho nada a ver com as cartas! Quer ver? Olhe então!
 
-#Action:show-backpack-1
+#Action:show-picture
+#Picture:case-1-backpack-1
 ((empty))
 
 #Speaker:Professora
@@ -89,7 +91,8 @@ Não fui eu, eu já falei!
 #Speaker:Howard
 Então é óbvio que você vai nos falar o que é isso aqui.
 
-#Action:show-backpack-2
+#Action:show-picture
+#Picture:case-1-backpack-2
 ((empty))
 
 #Color:Green
@@ -192,7 +195,7 @@ Não... Digo, sim! Era só uma brincadeira, professora, me desculpe...
 #Color:Blue
 (Péssima idéia, por quê eu fui falar isso?)
 
-#Speaker:professora
+#Speaker:Professora
 Bem, poderia, desta vez, dizer quem é você de verdade?
 
 -> whatIsYourName
@@ -220,7 +223,8 @@ Howard, nos conte então o que você viu.
 #Speaker:Howard
 Óbvio. Foi assim que aconteceu...
 
-#Action:testimony-transit-1-in
+#Action:testimony-transit
+#Testimony:in
 ((empty))
 
 #Color:Green
@@ -246,7 +250,8 @@ Foi quando eu estava no corredor e vi a porta da sala aberta.
 #Color:Green
 Olhei dentro e vi Jack pegando o gameboy da mochila de Dexter!
 
-#Action:testimony-transit-1-out
+#Action:testimony-transit
+#Testimony:out
 ((empty))
 
 #Speaker:Professora
@@ -256,14 +261,14 @@ Hmm, entendo
 #Color:Blue
 (A princípio não vejo nada de errado, mas...Algo me soa estranho, só não sei dizer o que é.)
 
-#Speaker:professora
+#Speaker:Professora
 Temos aqui a lista de pessoas que tiveram acesso à chave da sala durante o intervalo.
 
 #Action:show-item
 #Item:case-1-key-access-list
 ((empty))
 
-#Speaker:professora
+#Speaker:Professora
 Temos também o gameboy, que foi encontrado na mochila de Jack.
 
 #Action:show-item
@@ -308,7 +313,7 @@ Ok... Vamos começar então!
 
 //CROSS EXAMINATION CASO 1
 
-#Action:cross-exam-1
+#Action:cross-exam
 ((empty))
 
 #Color:Green
@@ -317,18 +322,20 @@ Testemunho: O que eu vi
 
 == case1CrossExam1Phrase1 ==
 #Speaker:Howard
+#OptionMode:cross-exam
 Obviamente que eu e Dexter estávamos no terraço no intervalo. Sempre almoçamos lá.
 ~crossExamReturn = ->case1CrossExam1Phrase1
 ->case1CrossExam1Choice1
 
 == case1CrossExam1Choice1 ==
 + [Pressionar] -> case1CrossExam1Choice1.press 
-+ [Próxima Frase]  -> case1CrossExam1Phrase2
++ [cross-next]  -> case1CrossExam1Phrase2
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> crossExamErrorMain
 
 = press
-#Press:YoungElise
+#Action:press
+#Press:young-elise
 ((empty))
 
 #Speaker:Elise
@@ -352,19 +359,21 @@ Certo, vocês estavam almoçando, o que aconteceu?
 
 == case1CrossExam1Phrase2 ==
 #Speaker:Howard
+#OptionMode:cross-exam
 Foi quando Jack apareceu e disse que os professores estavam chamando Dexter.
 ~crossExamReturn = ->case1CrossExam1Phrase2
 ->case1CrossExam1Choice2
 
 == case1CrossExam1Choice2 ==
 + [Pressionar] -> case1CrossExam1Choice2.press
-+ [Frase Anterior] -> case1CrossExam1Phrase1
-+ [Próxima Frase]  -> case1CrossExam1Phrase3
++ [cross-previous] -> case1CrossExam1Phrase1
++ [cross-next]  -> case1CrossExam1Phrase3
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> crossExamErrorMain
 
 = press
-#Press:YoungElise
+#Action:press
+#Press:young-elise
 ((empty))
 
 #Speaker:Elise
@@ -386,19 +395,21 @@ Continuando...
     
 == case1CrossExam1Phrase3 ==
 #Speaker:Howard
+#OptionMode:cross-exam
 Assim que Dexter desceu, Jack não tardou e desceu também.
 ~crossExamReturn = ->case1CrossExam1Phrase3
 ->case1CrossExam1Choice3
 
 == case1CrossExam1Choice3 ==
 + [Pressionar] -> case1CrossExam1Choice3.press 
-+ [Frase Anterior] -> case1CrossExam1Phrase2
-+ [Próxima Frase]  -> case1CrossExam1Phrase4
++ [cross-previous] -> case1CrossExam1Phrase2
++ [cross-next]  -> case1CrossExam1Phrase4
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> crossExamErrorMain
 
 = press
-#Press:YoungElise
+#Action: press
+#Press: young-elise
 ((empty))
 
 #Speaker:Elise
@@ -425,19 +436,21 @@ E o que você fez?
 
 == case1CrossExam1Phrase4 ==
 #Speaker:Howard
+#OptionMode:cross-exam
 Terminei meu almoço e decidi passar na sala de aula para pegar umas coisas.
 ~crossExamReturn = ->case1CrossExam1Phrase4
 -> case1CrossExam1Choice4
 
 == case1CrossExam1Choice4 ==
 + [Pressionar] -> case1CrossExam1Choice4.press 
-+ [Frase Anterior] -> case1CrossExam1Phrase3
-+ [Próxima Frase]  -> case1CrossExam1Phrase5
++ [cross-previous] -> case1CrossExam1Phrase3
++ [cross-next]  -> case1CrossExam1Phrase5
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> crossExamErrorMain
 
 = press
-#Press:YoungElise
+#Action:press
+#Press:young-elise
 ((empty))
 
 #Speaker:Elise
@@ -461,19 +474,21 @@ Mas então...
 
 == case1CrossExam1Phrase5 ==
 #Speaker:Howard
+#OptionMode:cross-exam
 Foi quando eu estava no corredor e vi a porta da sala aberta.
 ~crossExamReturn = ->case1CrossExam1Phrase5
 -> case1CrossExam1Choice5
 
 == case1CrossExam1Choice5 ==
 + [Pressionar] -> case1CrossExam1Choice5.press 
-+ [Frase Anterior] -> case1CrossExam1Phrase4
-+ [Próxima Frase]  -> case1CrossExam1Phrase6
++ [cross-previous] -> case1CrossExam1Phrase4
++ [cross-next]  -> case1CrossExam1Phrase6
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> case1CrossExam1ChoiceRight
 
 = press
-#Press:YoungElise
+#Action: press
+#Press: young-elise
 ((empty))
 
 #Speaker:Elise
@@ -497,20 +512,22 @@ Tá, você passou pela sala e fez o que?
 ->case1CrossExam1Phrase6    
 
 == case1CrossExam1Phrase6 ==
-#Howard
+#Speaker:Howard
+#OptionMode:cross-exam
 Olhei dentro e vi Jack pegando o gameboy da mochila de Dexter!
 ~crossExamReturn = ->case1CrossExam1Phrase6
 -> case1CrossExam1Choice6
 
 == case1CrossExam1Choice6 ==
 + [Pressionar] -> case1CrossExam1Choice6.press 
-+ [Frase Anterior] -> case1CrossExam1Phrase5
-+ [Próxima Frase]  -> case1CrossExam1Conclusion
++ [cross-previous] -> case1CrossExam1Phrase5
++ [cross-finish]  -> case1CrossExam1Conclusion
 + [Apresentar:case-1-gameboy] -> crossExamErrorMain
 + [Apresentar:case-1-key-access-list] -> crossExamErrorMain
 
 = press
-#Press:YoungElise
+#Action:press
+#Press:young-elise
 ((empty))
 
 #Speaker:Elise
@@ -543,7 +560,8 @@ Ah, nada não, só estava pensando alto, deixa para lá.
 ->case1CrossExam1Phrase1 
 
 == case1CrossExam1ChoiceRight ==
-#Present:YoungElise
+#Action:present
+#Present:young-elise
 ((empty))
 
 #Speaker:Elise

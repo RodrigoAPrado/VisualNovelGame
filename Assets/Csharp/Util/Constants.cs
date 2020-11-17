@@ -1,4 +1,4 @@
-namespace EliseVisualNovel.Assets.Csharp.Util
+namespace Csharp.Util
 {
     public static class Constants
     {

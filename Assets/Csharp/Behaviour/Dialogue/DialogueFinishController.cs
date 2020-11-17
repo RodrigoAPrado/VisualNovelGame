@@ -9,29 +9,34 @@ public class DialogueFinishController : MonoBehaviour
 
     public StoryTextDialogueController storyTextDialogueController;
 
-    private StoryDialogueService storyDialogueService;
+    protected StoryDialogueService storyDialogueService;
 
     private bool isAwatingPlayerChoice;
 
-    DialogueFinishController() {
+    protected DialogueFinishController() {
         storyDialogueService = StoryDialogueService.GetInstance();
     }
 
     void Awake() {
-        storyTextDialogueController.OnFinishReading += PlayFinishSprite;
+        storyTextDialogueController.OnFinishReading += CheckPlayFinishSprite;
         storyTextDialogueController.OnStartReading += HideFinishSprite;
         storyDialogueService.AwaitPlayerChoice += AwaitPlayerChoice;
+        storyDialogueService.AwaitCrossExamChoice += AwaitPlayerChoice;
         storyDialogueService.FinishPlayerChoice += FinishPlayerChoice;
     }
 
-    private void HideFinishSprite() {
-        dialogueFinishAnimator.SetBool("Play", false);
-    }
-
-    private void PlayFinishSprite() {
+    private void CheckPlayFinishSprite() {
         if(isAwatingPlayerChoice) {
             return; 
         }
+        PlayFinishSprite();
+    }
+
+    protected void HideFinishSprite() {
+        dialogueFinishAnimator.SetBool("Play", false);
+    }
+
+    protected void PlayFinishSprite() {
         dialogueFinishAnimator.SetBool("Play", true);
     }
 

@@ -3,30 +3,31 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Csharp.Model.Dialogue;
+using Csharp.Service.Super;
 
 namespace Csharp.Service
 {
-    public class StoryReadingService
+    public class StoryReadingService : SingletonService<StoryReadingService>
     {
-        private const string SpeakerTag = "Speaker:";
-        private const string SpeakerTitleTag = "SpeakerTitle:";
         private const string ActionTag = "Action:";
         private const string ColorTag = "Color:";
-
-        private static StoryReadingService instance;
+        private const string OptionModeTag = "OptionMode:";
+        private const string SpeakerTag = "Speaker:";
+        private const string SpeakerTitleTag = "SpeakerTitle:";
 
         private StoryService storyService;
 
         private StoryDialogueService storyDialogueService;
 
-        private StoryReadingService() {
+        private ActionProcessService actionProcessService;
+
+        public StoryReadingService() {
+            ValidateSingleton();
             storyService = StoryService.GetInstance();
             storyDialogueService = StoryDialogueService.GetInstance();
+            actionProcessService = ActionProcessService.GetInstance();
+            
         }
-
-        public static StoryReadingService GetInstance() {
-            return instance ?? (instance = new StoryReadingService());
-        } 
 
         public void Setup(string storyText) {
             storyService.SetStory(storyText);
@@ -45,9 +46,8 @@ namespace Csharp.Service
 
         private void OnStoryRead() {
             var storyTags = storyService.StoryCurrentTags;
-            var storyAction = GetTagData(storyTags, ActionTag);
-            if(storyAction.Length > 0) {
-                // Do something
+            if(CheckActionAndSkipDialogue(storyTags)) {
+                NextDialogue();
                 return;
             }
 
@@ -58,6 +58,7 @@ namespace Csharp.Service
             dialogueData.SpeakerTitle = GetTagData(storyTags, SpeakerTitleTag);
             dialogueData.TextColor = GetTagData(storyTags, ColorTag);
             dialogueData.IsOptionsNext = storyService.AwaitPlayerChoice;
+            dialogueData.OptionMode = GetTagData(storyTags, OptionModeTag);
 
             storyDialogueService.SetDialogueData(dialogueData);
         }
@@ -74,5 +75,14 @@ namespace Csharp.Service
             }
             return data.Split(':')[1];        
         }
+
+        private bool CheckActionAndSkipDialogue(List<string> storyTags) {
+            var storyAction = GetTagData(storyTags, ActionTag);
+            if(storyAction.Length <= 0) {
+                return false;
+            }
+
+            return actionProcessService.ProcessActionAndCheckSkipDialogue(storyAction, storyTags);
+        }    
     }
 }

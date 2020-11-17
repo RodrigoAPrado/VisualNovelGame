@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Csharp.Model.Dialogue;
+using Csharp.Service.Super;
 
 namespace Csharp.Service
 {
-    public class StoryDialogueService
+    public class StoryDialogueService : SingletonService<StoryDialogueService>
     {
         public string CurrentText { get; private set; }
         public string CurrentSpeaker { get; private set; }
@@ -14,9 +15,8 @@ namespace Csharp.Service
 
         public event Action DialogueSet;
         public event Action AwaitPlayerChoice;
-        public event Action FinishPlayerChoice;
-
-        private static StoryDialogueService instance;        
+        public event Action AwaitCrossExamChoice;
+        public event Action FinishPlayerChoice;  
 
         private readonly Dictionary<string, Color> availableColors = new Dictionary<string, Color>{
             {"Blue" , new Color(0.51f, 0.38f, 0.81f)},
@@ -24,15 +24,13 @@ namespace Csharp.Service
             {"Default", new Color(1, 1, 1)}
         };
 
-        private StoryDialogueService() {}
-
-        public static StoryDialogueService GetInstance() {
-            return instance ?? (instance = new StoryDialogueService());
+        public StoryDialogueService() {
+            ValidateSingleton();
         }
-
+        
         public void SetDialogueData(DialogueLineModel dialogueData) {
             if(dialogueData.IsOptionsNext) {
-                AwaitPlayerChoice?.Invoke();
+                SetupOptionMode(dialogueData.OptionMode);
             }
 
             CurrentText = dialogueData.Text;
@@ -49,6 +47,19 @@ namespace Csharp.Service
 
         private Color GetColor(string color) {
             return availableColors.ContainsKey(color) ? availableColors[color] : availableColors["Default"];
+        }
+
+        private void SetupOptionMode(string optionMode){
+            switch(optionMode) {
+                case "":
+                    AwaitPlayerChoice?.Invoke(); 
+                break;
+                case "cross-exam":
+                    AwaitCrossExamChoice?.Invoke();
+                break;
+                default:
+                throw new Exception("Option mode not found: " + optionMode);
+            }
         }
     }
 }

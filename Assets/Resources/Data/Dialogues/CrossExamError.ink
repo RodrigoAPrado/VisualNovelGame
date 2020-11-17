@@ -3,7 +3,8 @@ VAR crossExamReturn = ""
 VAR crossExamErrorLastPhrase = 0
 
 == crossExamErrorMain ==
-#Present:YoungElise
+#Action:present
+#Present:young-elise
 ((empty))
 
 ~temp errorPhrase = RANDOM(1, 4)
@@ -35,8 +36,10 @@ Elise, você acha que tem algo errado com o que ele disse?
 Talvez?
 
 #Speaker:Professora
-#Anim:hitpoint-reduce
 Se você não tiver certeza não interrompa.
+
+#Action:reduce-hit-point
+((empty))
 
 ~hitPoints--
 
@@ -65,8 +68,10 @@ Elise, qual o problema?
 Não, é que eu... Eu pensei que... É, acho que nada;
 
 #Speaker:Professora
-#Anim:hitpoint-reduce
 Desse jeito não posso continuar com sua análise, esteja mais atenta.
+
+#Action:reduce-hit-point
+((empty))
 
 ~hitPoints--
 
@@ -96,8 +101,10 @@ Na... ?
 Na... Nada, eu devo ter me confundido.
 
 #Speaker:Professora
-#Anim:hitpoint-reduce
 Na... Na verdade eu acho que você está é enrolando, mocinha.
+
+#Action:reduce-hit-point
+((empty))
 
 ~hitPoints--
 
@@ -139,8 +146,10 @@ Não contradiz né?
 É óbvio que não!
 
 #Speaker:Professora
-#Anim:hitpoint-reduce
 Elise, por favor pense na explicação antes de acusar algo da próxima vez.
+
+#Action:reduce-hit-point
+((empty))
 
 ~hitPoints--
 
@@ -162,8 +171,6 @@ Bem, acho que ouvimos o suficiente.
 Mas, Professora, eu ainda não-
 
 #Speaker:Professora
-
-#Speaker:Professora
 Silêncio!
 
 #Speaker:Professora
@@ -181,7 +188,7 @@ Enfim, Jack, venha comigo para a diretoria.
 #Speaker:Howard
 Haha, mas é óbvio que iria acabar assim, não é mesmo?
 
-#Action:game-over
+#Action:
 ((gameOver))
 ->END
 

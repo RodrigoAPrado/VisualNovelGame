@@ -11,5 +11,7 @@ namespace Csharp.Model.Dialogue
         public string TextColor { get; set; }
 
         public bool IsOptionsNext { get; set; }
+
+        public string OptionMode { get; set; }
     }
 }

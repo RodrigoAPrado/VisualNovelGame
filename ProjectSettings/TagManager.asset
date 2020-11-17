@@ -13,6 +13,8 @@ TagManager:
   - SceneController
   - SpeakerTitle Text
   - Canvas
+  - CrossExamNext
+  - CrossExamPrevious
   layers:
   - Default
   - TransparentFX

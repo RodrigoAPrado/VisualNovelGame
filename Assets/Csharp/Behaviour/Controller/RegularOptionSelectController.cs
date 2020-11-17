@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Csharp.Service;
 
-public class OptionSelectController : MonoBehaviour
+public class RegularOptionSelectController : MonoBehaviour
 {
     public GameObject optionButtonPrefab;
 
@@ -27,7 +27,7 @@ public class OptionSelectController : MonoBehaviour
 
     private bool optionSelected;
 
-    OptionSelectController() {
+    RegularOptionSelectController() {
         optionSelectService = OptionSelectService.GetInstance();
     }
 

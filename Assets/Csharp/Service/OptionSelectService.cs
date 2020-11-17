@@ -1,34 +1,34 @@
+using System.Diagnostics;
 using System.Data;
 using System;
 using System.Collections.Generic;
 using Ink.Runtime;
+using Csharp.Service.Super;
 
 namespace Csharp.Service
 {
-    public class OptionSelectService
+    public class OptionSelectService : SingletonService<OptionSelectService>
     {
         private StoryService storyService;
 
         private StoryDialogueService storyDialogueService;
 
-        private static OptionSelectService instance;
-
         public event Action SetupPlayerChoice;
 
         public event Action ClearPlayerChoice;
 
-        private OptionSelectService() {
+        public event Action SetupCrossExam;
+
+        public OptionSelectService() {
+            ValidateSingleton();
             storyService = StoryService.GetInstance();
             storyDialogueService = StoryDialogueService.GetInstance();
         }    
 
-        public static OptionSelectService GetInstance() {
-            return instance ?? (instance = new OptionSelectService());
-        }
-
         public void Setup() {
             storyDialogueService.AwaitPlayerChoice += AwaitPlayerChoice;
             storyDialogueService.FinishPlayerChoice += FinishPlayerChoice;
+            storyDialogueService.AwaitCrossExamChoice += AwaitCrossExamChoice;
         }
 
         public List<string> GetChoices() {
@@ -47,6 +47,10 @@ namespace Csharp.Service
 
         private void AwaitPlayerChoice() {
             SetupPlayerChoice?.Invoke();
+        }
+
+        private void AwaitCrossExamChoice() {
+            SetupCrossExam?.Invoke();
         }
 
         private void FinishPlayerChoice() {

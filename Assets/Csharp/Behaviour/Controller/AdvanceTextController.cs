@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Csharp.Service;
 
-public class PlayerInputController : MonoBehaviour
+public class AdvanceTextController : MonoBehaviour
 {
     private StoryTextDialogueController dialogueController;
 
@@ -14,7 +14,7 @@ public class PlayerInputController : MonoBehaviour
 
     private StoryDialogueService storyDialogueService;
 
-    PlayerInputController() {
+    AdvanceTextController() {
         storyDialogueService = StoryDialogueService.GetInstance();
     }
 

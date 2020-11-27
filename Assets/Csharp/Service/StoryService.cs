@@ -21,6 +21,8 @@ namespace Csharp.Service
 
         public bool AwaitPlayerChoice => story.currentChoices?.Count > 0;
 
+        public string StoryName {get; private set;}
+
         private Story story;
 
         public event Action OnStorySet;
@@ -33,7 +35,8 @@ namespace Csharp.Service
             ValidateSingleton();
         }
 
-        public void SetStory(string storyText) {
+        public void SetStory(string storyName, string storyText) {
+            StoryName = storyName;
             story = new Story(storyText);
             OnStorySet?.Invoke();
         }

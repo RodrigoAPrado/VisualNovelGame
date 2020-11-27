@@ -5,20 +5,23 @@ using Csharp.Service;
 
 public class InventoryScreenController : MonoBehaviour
 {
-
     public GameObject inventoryOverlay;
     public GameObject inventoryScreen;
     public GameObject profileScreen;
     public GameObject inventoryCloseButton;
 
-    private InventoryService service;
+    private InventoryService inventoryService;
+
+    private ItemLibraryService libraryService;
 
     public InventoryScreenController() {
-        service = InventoryService.GetInstance();
+        inventoryService = InventoryService.GetInstance();
+        libraryService = ItemLibraryService.GetInstance();
     }
 
     void Awake() {
-        service.Setup();
+        inventoryService.Setup();
+        libraryService.Setup();
         DeactivateInventoryScreen();
     }
 

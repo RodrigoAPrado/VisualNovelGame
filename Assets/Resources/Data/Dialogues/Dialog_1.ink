@@ -3,21 +3,18 @@ VAR case_1_gameboy = false
 VAR case_1_key_access_list = false
 VAR case_1_book = false
 VAR inventory_list = "case_1_key_access_list;case_1_gameboy;case_1_book"
-VAR teste = 1
 
 #Speaker:???-1
 Isso é injusto. Eu sou melhor que os outros. Eu! É óbvio!
 
 #Speaker:???-1
 É tudo culpa dele! Essa fita tinha que ser minha! Quem ele pensa que é?
-~teste = 2
 
 #Speaker:???-2
 Ei! O que você está fazendo na carteira do Dexter?
 
 #Speaker:???-1
 Gugh!
-~teste = 3
 
 #Speaker:???-1
 Droga! Achei que não tinha ninguém perto... Cuida da sua vida, sai daqui!

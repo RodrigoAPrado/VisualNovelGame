@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour
     }
 
     void Awake() {
-        storyReadingService.Setup(sceneScript.text);
+        storyReadingService.Setup(sceneScript.name, sceneScript.text);
     }
 
     void Start() {

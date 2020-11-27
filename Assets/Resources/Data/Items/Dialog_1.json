@@ -1,0 +1,42 @@
+{
+    "itemList" : [
+        {
+            "writtenName": "Gameboy",
+            "storyVariableName": "case_1_gameboy",
+            "bigIconPath": "none",
+            "smallIconPath": "none",
+            "itemDescription": "Um gameboy amarelo. Aparenta estar bem cuidado. Não consta nenhuma fita dentro."
+        },
+        {
+            "writtenName": "Histórico de empréstimos da Chave",
+            "storyVariableName": "case_1_key_access_list",
+            "bigIconPath": "none",
+            "smallIconPath": "none",
+            "itemDescription": "Lista que contém data, horário e nome de quem pegou e devolveu as chaves da sala 602.",
+            "details" : {
+                "type": "text",
+                "pages": 1,
+                "text": [
+                    "12h35 - Dexter pegou a chave",
+                    "12h38 - Dexter devolveu a chave",
+                    "12h40 - Howard pegou a chave",
+                    "12h45 - Jack devolveu a chave"
+                ]
+            }
+        },
+        {
+            "writtenName": "Livro de Física",
+            "storyVariableName": "case_1_book",
+            "bigIconPath": "none",
+            "smallIconPath": "none",
+            "itemDescription": "Livro comleto de física que abrange todos os tópicos do ensino médio. Na segunda página possui um registro com data e horário de aluguel.",
+            "details" : {
+                "type": "text",
+                "pages": 1,
+                "text": [
+    
+                ]
+            }
+        }       
+    ]
+}

@@ -29,8 +29,8 @@ namespace Csharp.Service
             
         }
 
-        public void Setup(string storyText) {
-            storyService.SetStory(storyText);
+        public void Setup(string storyName, string storyText) {
+            storyService.SetStory(storyName, storyText);
             storyService.OnStoryRead += OnStoryRead;
             storyService.OnPlayerChoice += OnPlayerChoice;
         }

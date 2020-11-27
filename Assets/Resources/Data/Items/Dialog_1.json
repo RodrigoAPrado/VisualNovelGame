@@ -1,3 +1,4 @@
+
 {
     "itemList" : [
         {
@@ -29,12 +30,12 @@
             "storyVariableName": "case_1_book",
             "bigIconPath": "none",
             "smallIconPath": "none",
-            "itemDescription": "Livro comleto de física que abrange todos os tópicos do ensino médio. Na segunda página possui um registro com data e horário de aluguel.",
+            "itemDescription": "Livro completo de física que abrange todos os tópicos do ensino médio. Na segunda página possui um registro com data e horário de aluguel.",
             "details" : {
                 "type": "text",
                 "pages": 1,
                 "text": [
-    
+                    "Empréstimo às 9h12 para Howard Deduck"
                 ]
             }
         }       

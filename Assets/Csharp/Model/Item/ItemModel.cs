@@ -9,6 +9,7 @@ namespace Csharp.Model.Item
         public bool HasDetails => details !=  null;
         public string writtenName;
         public string storyVariablaName;
+        public string itemVersion;
         public string bigIconPath;
         public string smallIconPath;
         public string itemDescription;

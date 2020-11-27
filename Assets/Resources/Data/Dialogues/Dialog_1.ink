@@ -1,7 +1,7 @@
 INCLUDE CrossExamError.ink
-VAR case_1_gameboy = false
-VAR case_1_key_access_list = false
-VAR case_1_book = false
+VAR case_1_gameboy = 0
+VAR case_1_key_access_list = 0
+VAR case_1_book = 0
 VAR inventory_list = "case_1_key_access_list;case_1_gameboy;case_1_book"
 
 #Speaker:???-1
@@ -271,7 +271,7 @@ Temos aqui a lista de pessoas que tiveram acesso à chave da sala durante o inte
 #Action:show-item
 #Item:case-1-key-access-list
 ((empty))
-~case_1_key_access_list = true
+~case_1_key_access_list = 1
 
 #Speaker:Professora
 Temos também o gameboy, que foi encontrado na mochila de Jack.
@@ -279,7 +279,7 @@ Temos também o gameboy, que foi encontrado na mochila de Jack.
 #Action:show-item
 #Item:case-1-gameboy
 ((empty))
-~case_1_gameboy = true
+~case_1_gameboy = 1
 
 #Speaker:Professora
 Elise, caso você queira analisar os objetos de perto, basta checar eles no seu inventário.

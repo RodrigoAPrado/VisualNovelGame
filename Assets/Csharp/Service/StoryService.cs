@@ -1,3 +1,4 @@
+using System.Dynamic;
 using System.Diagnostics;
 using System.Data;
 using System;
@@ -22,6 +23,8 @@ namespace Csharp.Service
 
         private Story story;
 
+        public event Action OnStorySet;
+
         public event Action OnStoryRead;
 
         public event Action OnPlayerChoice;
@@ -32,10 +35,15 @@ namespace Csharp.Service
 
         public void SetStory(string storyText) {
             story = new Story(storyText);
+            OnStorySet?.Invoke();
         }
 
         public void AddStoryContinueListener(Action listener) {
             story.onDidContinue += listener;
+        }
+
+        public void ObserveStoryVariables(string[] variableNames, Story.VariableObserver action) {
+            story.ObserveVariables(variableNames, action);
         }
 
         public void ResetStory() {
@@ -57,6 +65,18 @@ namespace Csharp.Service
         public void SelectOption(int choiceIndex) {
             story.ChooseChoiceIndex(choiceIndex);
             OnPlayerChoice?.Invoke();
+        }
+        
+        public bool AccessBoolStoryVariable(string variableName) {
+            return story.variablesState.GetVariableWithName("inventory_list").ToString() == "true";
+        }
+        
+        public string AccessStringStoryVariable(string variableName) {
+            return story.variablesState.GetVariableWithName("inventory_list").ToString();
+        }
+
+        public int AccessIntStoryVariable(string variableName) {
+            return Convert.ToInt32(story.variablesState.GetVariableWithName("inventory_list").ToString());
         }
     }
 }

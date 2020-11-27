@@ -12,7 +12,6 @@ namespace Csharp.Service.GameAction.Impl
         }
 
         public bool SetupActionAndCheckSkip(List<string> storyTags) {
-            UnityEngine.Debug.Log("CrossExamActionProcessor");
             return true; 
         }      
     }

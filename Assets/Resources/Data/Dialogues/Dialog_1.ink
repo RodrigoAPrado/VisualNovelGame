@@ -1,16 +1,23 @@
 INCLUDE CrossExamError.ink
+VAR case_1_gameboy = false
+VAR case_1_key_access_list = false
+VAR case_1_book = false
+VAR inventory_list = "case_1_key_access_list;case_1_gameboy;case_1_book"
+VAR teste = 1
 
 #Speaker:???-1
 Isso é injusto. Eu sou melhor que os outros. Eu! É óbvio!
 
 #Speaker:???-1
 É tudo culpa dele! Essa fita tinha que ser minha! Quem ele pensa que é?
+~teste = 2
 
 #Speaker:???-2
 Ei! O que você está fazendo na carteira do Dexter?
 
 #Speaker:???-1
 Gugh!
+~teste = 3
 
 #Speaker:???-1
 Droga! Achei que não tinha ninguém perto... Cuida da sua vida, sai daqui!
@@ -267,6 +274,7 @@ Temos aqui a lista de pessoas que tiveram acesso à chave da sala durante o inte
 #Action:show-item
 #Item:case-1-key-access-list
 ((empty))
+~case_1_key_access_list = true
 
 #Speaker:Professora
 Temos também o gameboy, que foi encontrado na mochila de Jack.
@@ -274,6 +282,7 @@ Temos também o gameboy, que foi encontrado na mochila de Jack.
 #Action:show-item
 #Item:case-1-gameboy
 ((empty))
+~case_1_gameboy = true
 
 #Speaker:Professora
 Elise, caso você queira analisar os objetos de perto, basta checar eles no seu inventário.
@@ -328,10 +337,9 @@ Obviamente que eu e Dexter estávamos no terraço no intervalo. Sempre almoçamo
 ->case1CrossExam1Choice1
 
 == case1CrossExam1Choice1 ==
-+ [Pressionar] -> case1CrossExam1Choice1.press 
++ [press] -> case1CrossExam1Choice1.press 
 + [cross-next]  -> case1CrossExam1Phrase2
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> crossExamErrorMain
++ [present:wrong-item] -> crossExamErrorMain
 
 = press
 #Action:press
@@ -365,11 +373,10 @@ Foi quando Jack apareceu e disse que os professores estavam chamando Dexter.
 ->case1CrossExam1Choice2
 
 == case1CrossExam1Choice2 ==
-+ [Pressionar] -> case1CrossExam1Choice2.press
++ [press] -> case1CrossExam1Choice2.press
 + [cross-previous] -> case1CrossExam1Phrase1
 + [cross-next]  -> case1CrossExam1Phrase3
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> crossExamErrorMain
++ [present:wrong-item] -> crossExamErrorMain
 
 = press
 #Action:press
@@ -401,11 +408,10 @@ Assim que Dexter desceu, Jack não tardou e desceu também.
 ->case1CrossExam1Choice3
 
 == case1CrossExam1Choice3 ==
-+ [Pressionar] -> case1CrossExam1Choice3.press 
++ [press] -> case1CrossExam1Choice3.press 
 + [cross-previous] -> case1CrossExam1Phrase2
 + [cross-next]  -> case1CrossExam1Phrase4
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> crossExamErrorMain
++ [present:wrong-item] -> crossExamErrorMain
 
 = press
 #Action: press
@@ -442,11 +448,10 @@ Terminei meu almoço e decidi passar na sala de aula para pegar umas coisas.
 -> case1CrossExam1Choice4
 
 == case1CrossExam1Choice4 ==
-+ [Pressionar] -> case1CrossExam1Choice4.press 
++ [press] -> case1CrossExam1Choice4.press 
 + [cross-previous] -> case1CrossExam1Phrase3
 + [cross-next]  -> case1CrossExam1Phrase5
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> crossExamErrorMain
++ [present:wrong-item] -> crossExamErrorMain
 
 = press
 #Action:press
@@ -480,11 +485,11 @@ Foi quando eu estava no corredor e vi a porta da sala aberta.
 -> case1CrossExam1Choice5
 
 == case1CrossExam1Choice5 ==
-+ [Pressionar] -> case1CrossExam1Choice5.press 
++ [press] -> case1CrossExam1Choice5.press 
 + [cross-previous] -> case1CrossExam1Phrase4
 + [cross-next]  -> case1CrossExam1Phrase6
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> case1CrossExam1ChoiceRight
++ [present:wrong-item] -> crossExamErrorMain
++ [present:case-1-key-access-list] -> case1CrossExam1ChoiceRight
 
 = press
 #Action: press
@@ -519,11 +524,10 @@ Olhei dentro e vi Jack pegando o gameboy da mochila de Dexter!
 -> case1CrossExam1Choice6
 
 == case1CrossExam1Choice6 ==
-+ [Pressionar] -> case1CrossExam1Choice6.press 
++ [press] -> case1CrossExam1Choice6.press 
 + [cross-previous] -> case1CrossExam1Phrase5
 + [cross-finish]  -> case1CrossExam1Conclusion
-+ [Apresentar:case-1-gameboy] -> crossExamErrorMain
-+ [Apresentar:case-1-key-access-list] -> crossExamErrorMain
++ [present:wrong-item] -> crossExamErrorMain
 
 = press
 #Action:press

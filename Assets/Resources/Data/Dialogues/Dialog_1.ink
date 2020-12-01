@@ -1,8 +1,9 @@
 INCLUDE CrossExamError.ink
+VAR cap = 1
 VAR case_1_gameboy = 0
 VAR case_1_key_access_list = 0
 VAR case_1_book = 0
-VAR inventory_list = "case_1_key_access_list;case_1_gameboy;case_1_book"
+VAR inventory_list = "cap;case_1_key_access_list;case_1_gameboy;case_1_book"
 
 #Speaker:???-1
 Isso é injusto. Eu sou melhor que os outros. Eu! É óbvio!

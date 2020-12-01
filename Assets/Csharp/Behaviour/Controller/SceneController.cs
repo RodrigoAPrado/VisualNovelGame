@@ -14,12 +14,9 @@ public class SceneController : MonoBehaviour
     public SceneController() {
         storyReadingService = StoryReadingService.GetInstance();
     }
-
-    void Awake() {
-        storyReadingService.Setup(sceneScript.name, sceneScript.text);
-    }
-
+    
     void Start() {
+        storyReadingService.Setup(sceneScript.name, sceneScript.text);
         storyReadingService.BeginReadingStory();
     }
 

@@ -2,17 +2,27 @@
 {
     "itemList" : [
         {
+            "writtenName": "Boina de Veludo",
+            "storyVariableName": "cap",
+            "itemVersion": 1,
+            "bigIconPath": "Item_Boina_G",
+            "smallIconPath": "Item_Boina_P",
+            "itemDescription": "Uma boina de veludo que ganhei de presente. Me sinto como uma detetive usando ela."
+        },
+        {
             "writtenName": "Gameboy",
             "storyVariableName": "case_1_gameboy",
-            "bigIconPath": "none",
-            "smallIconPath": "none",
+            "itemVersion": 1,
+            "bigIconPath": "Item_Gameboy_G",
+            "smallIconPath": "Item_Gameboy_P",
             "itemDescription": "Um gameboy amarelo. Aparenta estar bem cuidado. Não consta nenhuma fita dentro."
         },
         {
             "writtenName": "Histórico de empréstimos da Chave",
             "storyVariableName": "case_1_key_access_list",
-            "bigIconPath": "none",
-            "smallIconPath": "none",
+            "itemVersion": 1,
+            "bigIconPath": "Item_Lista_G",
+            "smallIconPath": "Item_Lista_P",
             "itemDescription": "Lista que contém data, horário e nome de quem pegou e devolveu as chaves da sala 602.",
             "details" : {
                 "type": "text",
@@ -28,8 +38,9 @@
         {
             "writtenName": "Livro de Física",
             "storyVariableName": "case_1_book",
-            "bigIconPath": "none",
-            "smallIconPath": "none",
+            "itemVersion": 1,
+            "bigIconPath": "Item_Livro_G",
+            "smallIconPath": "Item_Livro_P",
             "itemDescription": "Livro completo de física que abrange todos os tópicos do ensino médio. Na segunda página possui um registro com data e horário de aluguel.",
             "details" : {
                 "type": "text",

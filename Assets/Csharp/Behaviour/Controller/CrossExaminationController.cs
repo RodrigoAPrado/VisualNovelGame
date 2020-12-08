@@ -7,16 +7,21 @@ public class CrossExaminationController : MonoBehaviour
 {
     public bool IsCrossExam { get; private set; }
 
+    public event Action CrossExamStart;
+
     private OptionSelectService optionSelectService;
 
     private CrossExamDialogueFinishController crossExamNextController;
 
     private CrossExamDialogueFinishController crossExamPreviousController;
 
+    private PressButtonController pressButtonController;
+
     private List<string> currentChoices;
 
     private const string crossExamNextOption = "cross-next";
     private const string crossExamPreviousOption = "cross-previous";
+    private const string presentWrongOption = "present:wrong-item";
 
     CrossExaminationController() {
         optionSelectService = OptionSelectService.GetInstance();
@@ -25,6 +30,7 @@ public class CrossExaminationController : MonoBehaviour
     void Awake() {
         crossExamNextController = GameObject.FindGameObjectWithTag("CrossExamNext").GetComponent<CrossExamDialogueFinishController>();
         crossExamPreviousController = GameObject.FindGameObjectWithTag("CrossExamPrevious").GetComponent<CrossExamDialogueFinishController>();
+        pressButtonController = GameObject.FindGameObjectWithTag("CrossExamPress").GetComponent<PressButtonController>();
         optionSelectService.SetupCrossExam += SetupCrossExam;
     }
 
@@ -40,7 +46,8 @@ public class CrossExaminationController : MonoBehaviour
             choiceIndex --;
         }
         if(choiceIndex < 0) {
-            throw new Exception("Option name not found: " + selectedOptionName);
+            SelectOption(CheckPresentWrongItem(selectedOptionName));
+            return;
         }
         EndCrossExam();
         optionSelectService.SelectOption(choiceIndex);
@@ -48,9 +55,11 @@ public class CrossExaminationController : MonoBehaviour
 
     private void SetupCrossExam() {
         IsCrossExam = true;
+        CrossExamStart?.Invoke();
         currentChoices = optionSelectService.GetChoices();
         CheckAdvanceButton(crossExamNextOption, crossExamNextController);
         CheckAdvanceButton(crossExamPreviousOption, crossExamPreviousController);
+        pressButtonController.Enable();
     }
 
     private void CheckAdvanceButton(string advanceOption, CrossExamDialogueFinishController advanceController) {
@@ -64,6 +73,14 @@ public class CrossExaminationController : MonoBehaviour
     private void EndCrossExam() {
         crossExamNextController.Disable();
         crossExamPreviousController.Disable();
+        pressButtonController.Disable();
         IsCrossExam = false;
+    }
+
+    private string CheckPresentWrongItem(string selectedOptionName) {
+        if(!selectedOptionName.Contains("present:")) {
+            throw new Exception("Option selected does not exist " + selectedOptionName);
+        }
+        return presentWrongOption;
     }
 }

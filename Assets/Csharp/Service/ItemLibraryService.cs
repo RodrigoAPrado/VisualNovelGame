@@ -41,7 +41,7 @@ namespace Csharp.Service
             itemLibrary = UnityEngine.JsonUtility.FromJson<ItemListModel>(itemLibraryString).itemList;
             foreach(ItemModel itemModel in itemLibrary) {
                 itemModel.SmallIcon = Resources.Load<Sprite>(ItemsSmallSpritePath + itemModel.smallIconPath);
-                itemModel.BigIcon = Resources.Load<Sprite>(ItemsSmallSpritePath + itemModel.bigIconPath);
+                itemModel.BigIcon = Resources.Load<Sprite>(ItemsBigSpritePath + itemModel.bigIconPath);
             }
         }
     }

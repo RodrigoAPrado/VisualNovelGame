@@ -18,6 +18,7 @@ TagManager:
   - InventoryScreenController
   - InventoryUI
   - ItemButtons
+  - CrossExamPress
   layers:
   - Default
   - TransparentFX

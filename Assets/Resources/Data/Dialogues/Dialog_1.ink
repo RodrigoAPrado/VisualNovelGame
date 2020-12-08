@@ -335,7 +335,7 @@ Obviamente que eu e Dexter estávamos no terraço no intervalo. Sempre almoçamo
 ->case1CrossExam1Choice1
 
 == case1CrossExam1Choice1 ==
-+ [press] -> case1CrossExam1Choice1.press 
++ [cross-press] -> case1CrossExam1Choice1.press 
 + [cross-next]  -> case1CrossExam1Phrase2
 + [present:wrong-item] -> crossExamErrorMain
 
@@ -371,7 +371,7 @@ Foi quando Jack apareceu e disse que os professores estavam chamando Dexter.
 ->case1CrossExam1Choice2
 
 == case1CrossExam1Choice2 ==
-+ [press] -> case1CrossExam1Choice2.press
++ [cross-press] -> case1CrossExam1Choice2.press
 + [cross-previous] -> case1CrossExam1Phrase1
 + [cross-next]  -> case1CrossExam1Phrase3
 + [present:wrong-item] -> crossExamErrorMain
@@ -406,7 +406,7 @@ Assim que Dexter desceu, Jack não tardou e desceu também.
 ->case1CrossExam1Choice3
 
 == case1CrossExam1Choice3 ==
-+ [press] -> case1CrossExam1Choice3.press 
++ [cross-press] -> case1CrossExam1Choice3.press 
 + [cross-previous] -> case1CrossExam1Phrase2
 + [cross-next]  -> case1CrossExam1Phrase4
 + [present:wrong-item] -> crossExamErrorMain
@@ -446,7 +446,7 @@ Terminei meu almoço e decidi passar na sala de aula para pegar umas coisas.
 -> case1CrossExam1Choice4
 
 == case1CrossExam1Choice4 ==
-+ [press] -> case1CrossExam1Choice4.press 
++ [cross-press] -> case1CrossExam1Choice4.press 
 + [cross-previous] -> case1CrossExam1Phrase3
 + [cross-next]  -> case1CrossExam1Phrase5
 + [present:wrong-item] -> crossExamErrorMain
@@ -483,7 +483,7 @@ Foi quando eu estava no corredor e vi a porta da sala aberta.
 -> case1CrossExam1Choice5
 
 == case1CrossExam1Choice5 ==
-+ [press] -> case1CrossExam1Choice5.press 
++ [cross-press] -> case1CrossExam1Choice5.press 
 + [cross-previous] -> case1CrossExam1Phrase4
 + [cross-next]  -> case1CrossExam1Phrase6
 + [present:wrong-item] -> crossExamErrorMain
@@ -522,7 +522,7 @@ Olhei dentro e vi Jack pegando o gameboy da mochila de Dexter!
 -> case1CrossExam1Choice6
 
 == case1CrossExam1Choice6 ==
-+ [press] -> case1CrossExam1Choice6.press 
++ [cross-press] -> case1CrossExam1Choice6.press 
 + [cross-previous] -> case1CrossExam1Phrase5
 + [cross-finish]  -> case1CrossExam1Conclusion
 + [present:wrong-item] -> crossExamErrorMain
